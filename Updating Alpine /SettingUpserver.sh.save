@@ -1,0 +1,30 @@
+#!bin/bash
+
+set -e
+
+#Let update and upgrade our system
+echo"Updating the system"
+apk update && apk upgrade
+
+#Let add some prequires 
+echo "Installing some requirements"
+apk add  git  curl wget vim  nano 
+apk  add openssh-server -y
+#Let  install python
+echo"Installing Python"
+apk add python3 py3-pip 
+
+#let install docker
+echo"Installing Docker and docker-compose"
+apk update && apk upgrade -y
+apk add docker docker-compose -y
+
+#Let add superuser  if  needed
+echo"Installing Super User"
+apk add sudo
+
+
+
+
+
+
