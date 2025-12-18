@@ -1,0 +1,55 @@
+#!/bin/bash
+
+SERVICE_OLLAMA="ollama"
+SERVICE_WEBUI="open-webui"
+
+case "$1" in
+  start)
+    echo "▶ Enabling & starting Ollama..."
+    sudo snap enable $SERVICE_OLLAMA
+    sudo snap start $SERVICE_OLLAMA
+    echo "✅ Ollama is running."
+    ;;
+  
+  start-ui)
+    echo "▶ Enabling & starting Ollama..."
+    sudo snap enable $SERVICE_OLLAMA
+    sudo snap start $SERVICE_OLLAMA
+
+    echo "▶ Enabling & starting Open WebUI..."
+    sudo snap enable $SERVICE_WEBUI
+    sudo snap start $SERVICE_WEBUI
+
+    echo "🌐 Open WebUI available at http://localhost:3000"
+    ;;
+  
+  stop)
+    echo "⏹ Stopping Ollama..."
+    sudo snap stop $SERVICE_OLLAMA
+    ;;
+  
+  stop-ui)
+    echo "⏹ Stopping & disabling Open WebUI..."
+    sudo snap stop $SERVICE_WEBUI
+    sudo snap disable $SERVICE_WEBUI
+    echo "⏹ Stopping Ollama..."
+    sudo snap stop $SERVICE_OLLAMA
+    ;;
+  
+  status)
+    echo "📊 AI services status:"
+    snap services | grep -E "ollama|open-webui"
+    ;;
+  
+  *)
+    echo "Usage: $0 {start|start-ui|stop|stop-ui|status}"
+    echo
+    echo "Commands:"
+    echo "  start     → Ollama only (low RAM)"
+    echo "  start-ui  → Ollama + Open WebUI"
+    echo "  stop      → Stop Ollama"
+    echo "  stop-ui   → Stop & disable Open WebUI + stop Ollama"
+    echo "  status    → Show services state"
+    exit 1
+    ;;
+esac
