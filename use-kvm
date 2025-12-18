@@ -1,0 +1,6 @@
+#!/bin/bash
+echo "[*] Switching to KVM mode..."
+sudo modprobe kvm
+sudo modprobe kvm_intel 2>/dev/null
+sudo modprobe kvm_amd 2>/dev/null
+echo "KVM modules loaded. You can now run QEMU/virt-manager."

@@ -1,0 +1,6 @@
+#!/bin/bash
+echo "[*] Switching to VirtualBox mode..."
+sudo rmmod kvm_intel 2>/dev/null
+sudo rmmod kvm_amd 2>/dev/null
+sudo rmmod kvm 2>/dev/null
+echo "KVM modules unloaded. You can now run VirtualBox."
